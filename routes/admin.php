@@ -32,16 +32,19 @@ Route::prefix("admin")->name("admin.")->middleware(['is_admin'])->group(function
      * All Category route list
      */
     Route::resource("category", CategoryController::class);
+    
     /**
      * All Blog route list
      */
     Route::resource('blogs', BlogController::class);
+
     /**
      * All Role route list
      */
     Route::get('/permission/{role}', [RoleController::class, 'permission'])->name('permission');
     Route::post('/permission/{role}', [RoleController::class, 'store_permission'])->name('permission_store');
     Route::resource("roles", RoleController::class);
+    
     /**
      * Order route list
      */

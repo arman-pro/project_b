@@ -55,8 +55,11 @@
                                 Action <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item delete_btn" href="javascript:void(0)">Delete</a>
+                                <a class="dropdown-item" href="{{route("admin.clients.edit", ["client" => $user->id])}}">Edit</a>
+                                <a 
+                                    class="dropdown-item delete_btn" href="javascript:void(0)"
+                                    data-link="{{route("admin.clients.destroy", ["client" => $user->id])}}"
+                                >Delete</a>
                             </div>
                         </div>
                     </td>
@@ -69,6 +72,9 @@
       </div>
     </div>
 </div>
+
+{{-- delete form --}}
+<form action="" id="delete_form" method="post">@csrf @method("DELETE")</form>
 @endsection
 
 @push('css')

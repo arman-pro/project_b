@@ -11,6 +11,16 @@ use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {
     use PermissionTrait;
+
+    public function __construct()
+    {
+        // user permission check
+        $this->middleware('permission:role-index,admin')->only(['index', 'show']);
+        $this->middleware('permission:role-create,admin')->only(['create', 'store']);
+        $this->middleware('permission:role-update,admin')->only(['edit', 'update']);
+        $this->middleware('permission:role-destroy,admin')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

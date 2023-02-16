@@ -70,8 +70,9 @@ class AdminController extends Controller
             unset($data['password']);
         }
         $admin = Admin::findOrFail($request->user);
-        $admin->update($data);
+        $admin->update($data);        
         if($request->role) {
+            $admin->removeRole($admin->getRoleNames()[0]);
             $role = Role::find($request->role);
             $admin->assignRole($role->name);
         }        

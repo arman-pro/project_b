@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        // user permission check
+        $this->middleware('permission:order-index,admin')->only(['index', 'show']);
+        $this->middleware('permission:order-create,admin')->only(['create', 'store']);
+        $this->middleware('permission:order-update,admin')->only(['edit', 'update']);
+        $this->middleware('permission:order-destroy,admin')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +71,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::with(['user'])->findOrFail($id);
+        return view("admin.orders.show", compact('order'));
     }
 
     /**
@@ -73,7 +83,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -85,7 +95,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $order = Order::findOrFail($id);
+        $order->update($data);
+        return redirect()->route('admin.orders.index')->with('message', 'Order updated successfull!');
     }
 
     /**
@@ -96,6 +109,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::destroy($id);
+        return redirect()->route("admin.orders.index")->with("message", "Order delete successfull!");
     }
 }

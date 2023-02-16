@@ -20,27 +20,34 @@
                 </a>
             </li>
 
+            @if($admin_user->canany(['category-index', "category-create", "category-update", "category-destroy"]))
             <li class="nav-item">
                 <a href="{{route("admin.category.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Category List</p>
                 </a>
             </li>
+            @endif
 
+            @if($admin_user->canany(['blog-index', "blog-create", "blog-update", "blog-destroy"]))
             <li class="nav-item">
                 <a href="{{route("admin.blogs.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Blog List</p>
                 </a>
             </li>
+            @endif
 
+            @if($admin_user->canany(['client-index', "client-create", "client-update", "client-destroy"]))
             <li class="nav-item">
-                <a href="{{route("admin.clients")}}" class="nav-link">
+                <a href="{{route("admin.clients.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Client List</p>
                 </a>
             </li>
+            @endif
 
+            @if($admin_user->canany(['order-index', "order-create", "order-update", "order-destroy"]))
             <li class="nav-item">
                 <a href="{{route("admin.orders.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
@@ -49,21 +56,25 @@
                     </p>
                 </a>
             </li>
+            @endif
 
+            @if($admin_user->canany(['admin-index', "admin-create", "admin-update", "admin-destroy"]))
             <li class="nav-item">
                 <a href="{{route("admin.users.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Admin List</p>
                 </a>
             </li>
+            @endif
            
-
+            @if($admin_user->canany(['role-index', "role-create", "role-update", "role-destroy"]))
             <li class="nav-item">
                 <a href="{{route("admin.roles.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Role Permission</p>
                 </a>
             </li>
+            @endif
 
             <li class="nav-item">
                 <a href="#" class="nav-link">

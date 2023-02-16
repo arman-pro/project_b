@@ -132,8 +132,11 @@
                                 Action <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item delete_btn" href="javascript:void(0)">Delete</a>
+                                <a class="dropdown-item" href="{{route("admin.orders.show", ["order" => $order->id])}}">Show</a>
+                                <a 
+                                    class="dropdown-item delete_btn" href="javascript:void(0)"
+                                    data-link="{{route("admin.orders.destroy", ["order" => $order->id])}}"
+                                >Delete</a>
                             </div>
                         </div>
                     </td>
@@ -146,6 +149,9 @@
       </div>
     </div>
 </div>
+
+{{-- delelete form --}}
+<form action="" id="delete_form" method="post">@method("DELETE") @csrf</form>
 @endsection
 
 @push('css')

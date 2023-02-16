@@ -12,7 +12,7 @@ trait PermissionTrait {
      */
     public function permission_list() {
         return [
-            'admin', 'blog', 'order', 'client', 'category',
+            'admin', 'blog', 'order', 'client', 'category', 'role',
         ];
     }
 

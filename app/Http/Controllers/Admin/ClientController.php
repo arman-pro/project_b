@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $users = User::withCount(['orders'])->get();
+        $users = User::withCount(['orders'])->orderBy("id", "desc")->get();
         return view('admin.clients.index', compact('users'));
     }
 
@@ -59,7 +60,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view("admin.clients.edit", compact("user"));
     }
 
     /**
@@ -71,7 +73,17 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'company_name' => ['required', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+        ]);
+        $data = $request->all();
+        $user = User::find($id);
+        $user->update($data);
+        return redirect()->route("admin.clients.index")->with("message", "User update successfull!");
     }
 
     /**
@@ -82,6 +94,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route("admin.clients.index")->with("message", "Order delete successfull!");
     }
 }

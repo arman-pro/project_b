@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['admin.layouts.sidebar'], function ($view) 
         {
             $pending_order = Order::whereStatus('1')->count();
+            $admin_user = auth()->guard("admin")->user();
             $view->with('pending_order', $pending_order ?? 0 );    
+            $view->with('admin_user', $admin_user);
         });
     }
 }
