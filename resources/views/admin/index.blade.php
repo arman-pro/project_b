@@ -16,20 +16,83 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
+  <div class="col-lg-12 col-sm-12">
+    <div class="card">
+      <div class="card-header bg-light">
+        <h4 class="card-title">Quick Access</h4>
+      </div>
+      <div class="card-body">
+        <a href="{{route("admin.category.create")}}" class="btn btn-sm btn-primary">Create Category</a>
+        <a href="{{route("admin.blogs.create")}}" class="btn btn-sm btn-info">Create Blog</a>
+        <a href="{{route("admin.blogs.index")}}" class="btn btn-sm btn-success">Blog List</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-sm-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
+           <div class="row">
+            {{-- total category --}}
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="far fa-star"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Categories</span>
+                  <span class="info-box-number">{{$total_category ?? 0}}</span>
+                </div>
+              </div>
+            </div> 
 
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the bulk of the card's
-            content.
-          </p>
+            {{-- total blog --}}
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="far fa-star"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Blogs</span>
+                  <span class="info-box-number">{{$total_blogs ?? 0}}</span>
+                </div>
+              </div>
+            </div> 
 
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+            {{-- total client --}}
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="far fa-star"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Clients</span>
+                  <span class="info-box-number">{{$total_clients ?? 0}}</span>
+                </div>
+              </div>
+            </div> 
+
+            {{-- total orders --}}
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="far fa-star"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Orders</span>
+                  <span class="info-box-number">{{$total_orders ?? 0}}</span>
+                </div>
+              </div>
+            </div> 
+
+            {{-- total admins --}}
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="far fa-star"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Admins</span>
+                  <span class="info-box-number">{{$total_admins ?? 0}}</span>
+                </div>
+              </div>
+            </div> 
+
+           </div>
         </div>
       </div>
     </div>
 </div>
+
 @endsection

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminRequest;
 use App\Models\Admin;
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +28,12 @@ class AdminController extends Controller
 
     public function dashboard() 
     {
-        return view("admin.index");
+        $total_orders = Order::count();
+        $total_category = Category::count();
+        $total_blogs = Blog::count();
+        $total_clients = User::count();
+        $total_admins = Admin::count();
+        return view("admin.index", compact("total_category", "total_orders", "total_blogs", "total_clients", "total_admins"));
     }
 
     public function index() 
