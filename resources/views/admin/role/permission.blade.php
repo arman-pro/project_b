@@ -23,7 +23,7 @@
     <div class="col-lg-12 col-sm-12">
       <div class="card">
         <div class="card-header bg-success">
-            <h4 class="card-title">Assign Permission</h4>
+            <h4 class="card-title">Assign Permission ({{ucfirst($role->name)}})</h4>
         </div>
         <div class="card-body">
             <form action="{{route("admin.permission_store", ['role' => $role->id])}}" method="post">

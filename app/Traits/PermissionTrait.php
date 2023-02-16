@@ -11,13 +11,9 @@ trait PermissionTrait {
      * @return array
      */
     public function permission_list() {
-       
         return [
-            'admin', 'blog', 'order', 'client',
+            'admin', 'blog', 'order', 'client', 'category',
         ];
-        // return [
-        //     'user', 'role', 'institution', 'batch', 'student', 'payment', 'sms'
-        // ];
     }
 
     // other permission

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -18,8 +20,18 @@ Route::prefix("admin")->name("admin.")->middleware(['is_admin'])->group(function
     Route::get("/", [AdminController::class, 'dashboard'])->name("index");
 
     Route::get("/clients", [AdminController::class, "clients"])->name('clients');
+    Route::post('admin/logout', [AdminController::class, 'logout'])->name("user.logout");
     Route::resource("/users", AdminController::class);
 
+    /**
+     * All clients route list
+     */
+    Route::resource("clients", ClientController::class);
+
+    /**
+     * All Category route list
+     */
+    Route::resource("category", CategoryController::class);
     /**
      * All Blog route list
      */

@@ -20,14 +20,19 @@
                 </a>
             </li>
 
-            @canany(['update', 'view', 'delete'], $post)
+            <li class="nav-item">
+                <a href="{{route("admin.category.index")}}" class="nav-link">
+                    <i class="nav-icon fas fa-angle-double-right"></i>
+                    <p>Category List</p>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a href="{{route("admin.blogs.index")}}" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Blog List</p>
                 </a>
             </li>
-            @endcanany()
 
             <li class="nav-item">
                 <a href="{{route("admin.clients")}}" class="nav-link">
@@ -51,6 +56,7 @@
                     <p>Admin List</p>
                 </a>
             </li>
+           
 
             <li class="nav-item">
                 <a href="{{route("admin.roles.index")}}" class="nav-link">

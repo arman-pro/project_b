@@ -74,12 +74,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" role="button">
+        <a class="nav-link" id="logout_btn" href="javascript:void(0)" role="button">
           <b>Logout</b>
         </a>
       </li>
     </ul>
   </nav>
+  <form id="logout_form" action="{{route("admin.user.logout")}}" method="post">@csrf</form>
   @include('admin.layouts.sidebar')
 
   <!-- Content Wrapper. Contains page content -->

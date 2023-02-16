@@ -15,6 +15,11 @@
       </ol>
     </div>
 </div>
+<div class="row mb-2">
+    <div class="col-sm-12">
+     <a href="{{route('admin.users.create')}}" class="btn btn-sm btn-warning">Create Admin</a>
+    </div>
+</div>
 @endsection
 
 @section('content')
@@ -43,7 +48,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$admin->name}}</td>
                         <td>{{$admin->email}}</td>
-                        <td>N/A</td>
+                        <td>{{$admin->getRoleNames()[0] ?? "N/A"}}</td>
                         <td>
                             @if($admin->is_active)
                                 <span class="badge badge-success">Active</span>
@@ -57,8 +62,11 @@
                                     Action <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu" role="menu">
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item delete_btn" href="javascript:void(0)">Delete</a>
+                                    <a class="dropdown-item" href="{{route("admin.users.edit", ['user' => $admin->id])}}">Edit</a>
+                                    <a 
+                                        class="dropdown-item delete_btn" href="javascript:void(0)"
+                                        data-link="{{route('admin.users.destroy', ['user' => $admin->id])}}"
+                                    >Delete</a>
                                 </div>
                             </div>
                         </td>
@@ -71,6 +79,8 @@
       </div>
     </div>
 </div>
+{{-- delete form --}}
+<form action="" id="delete_form" method="post">@csrf @method('DELETE')</form>
 @endsection
 
 @push('css')

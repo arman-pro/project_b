@@ -49,8 +49,7 @@
                   @error('image_qty')
                     <div class="invalid-feedback">{{$message }}</div>  
                   @enderror
-                </div> 
-                                   
+                </div>                                   
               </div>
               <div class="form-group row">
                 <label for="delivery_date" class="col-sm-3 col-form-label text-right">Delivery Date*</label>
