@@ -20,6 +20,7 @@ Visit this url for super admin.<br/>
 ```
 user: admin@gmail.com
 psw: password
+link: http://127.0.0.1:8000/admin
 ```
 [Admin](http://127.0.0.1:8000/admin)
 
