@@ -43,9 +43,10 @@ if(!function_exists('get_query_strings'))
             $param_couple = explode("&", $_SERVER['QUERY_STRING']);
             foreach($param_couple as $param) {
                 $arr = explode('=', $param);
+                $val = str_replace("+", " ", urldecode($arr[1]));
                 isset($query[$arr[0]]) ? 
-                    $query[$arr[0]] = [...$query[$arr[0]], $arr[1]] : 
-                    $query[$arr[0]] = [$arr[1]];
+                    $query[$arr[0]] = [...$query[$arr[0]], $val] : 
+                    $query[$arr[0]] = [$val];
             }
         }
         return $query;

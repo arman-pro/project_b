@@ -36,6 +36,12 @@ class AdminController extends Controller
         return view("admin.index", compact("total_category", "total_orders", "total_blogs", "total_clients", "total_admins"));
     }
 
+    public function profile()
+    {
+        $admin = Auth::guard('admin')->user();
+        return view("admin.profile", compact("admin"));
+    }
+
     public function index() 
     {
         $admins = Admin::all();
@@ -83,7 +89,10 @@ class AdminController extends Controller
             $admin->removeRole($admin->getRoleNames()[0]);
             $role = Role::find($request->role);
             $admin->assignRole($role->name);
-        }        
+        }       
+        if($request->redirect) {
+            return redirect()->route("admin.index")->with("message", "Admin update successfull!");
+        }
         return redirect()->route("admin.users.index")->with("message", "Admin update successfull!");
     }
 

@@ -33,6 +33,15 @@ class Blog extends Model
         return $this->hasMany(BlogCategory::class, 'blog_id', 'id');
     }
 
+    /**
+     * all categories list collection
+     * @return App\Models\BlogCategory
+     */
+    public function blogCategory()
+    {
+        return $this->hasMany(BlogCategory::class, 'blog_id', 'id');
+    }
+
     public function sluggable(): array
     {
         return [

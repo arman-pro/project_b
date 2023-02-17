@@ -20,4 +20,13 @@ class BlogCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * get blog
+     * @return App\Models\Blog
+     */
+    public function blog()
+    {
+        return $this->belongsTo(Blog::class);
+    }
+
 }

@@ -21,4 +21,13 @@ class Category extends Model
         ];
     }
 
+    /**
+     * get all blogs
+     * @return App\Models\Blog
+     */
+    public function blogs()
+    {
+        return $this->hasOneThrough(BlogCategory::class, Blog::class);
+    }
+
 }

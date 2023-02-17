@@ -77,6 +77,13 @@
             @endif
 
             <li class="nav-item">
+                <a href="{{route("admin.profile")}}" class="nav-link">
+                    <i class="nav-icon fas fa-angle-double-right"></i>
+                    <p>Profile</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-angle-double-right"></i>
                     <p>Settings</p>

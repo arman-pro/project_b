@@ -213,7 +213,7 @@
       theme: 'bootstrap4',
     });
 
-    $("#categories").val(@json($categories->pluck('id'))).trigger('change');
+    $("#categories").val(@json($blog->categories->pluck('id'))).trigger('change');
 
     // summer note init
     $('#description').summernote();

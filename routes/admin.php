@@ -20,6 +20,7 @@ Route::prefix("admin")->name("admin.")->middleware(['is_admin'])->group(function
     Route::get("/", [AdminController::class, 'dashboard'])->name("index");
 
     Route::get("/clients", [AdminController::class, "clients"])->name('clients');
+    Route::get("/profile", [AdminController::class, "profile"])->name("profile");
     Route::post('admin/logout', [AdminController::class, 'logout'])->name("user.logout");
     Route::resource("/users", AdminController::class);
 

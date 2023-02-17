@@ -49,7 +49,7 @@
                                 class="form-control select2 select2-primary"
                             >
                                 @foreach(get_order_job_types() as $type)
-                                    <option value="{{$type}}">{{$type}}</option>
+                                    <option value="{{urlencode($type)}}">{{$type}}</option>
                                 @endforeach
                             </select>
                         </div>

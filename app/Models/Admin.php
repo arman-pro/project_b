@@ -22,4 +22,9 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class, "created_by");
+    }
 }
