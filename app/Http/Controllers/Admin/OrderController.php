@@ -37,6 +37,7 @@ class OrderController extends Controller
         ->when(isset($queries['status']), function($query)use($queries) {
             return $query->whereIn('status', $queries['status']);
         })
+        ->orderBy('id', 'desc')
         ->get();
         $users = User::select(['id', 'name'])->get();
         return view('admin.orders.index', compact('orders', 'users'));
@@ -72,7 +73,8 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::with(['user'])->findOrFail($id);
-        return view("admin.orders.show", compact('order'));
+        $galleries = json_decode($order->gallery);
+        return view("admin.orders.show", compact('order', 'galleries'));
     }
 
     /**

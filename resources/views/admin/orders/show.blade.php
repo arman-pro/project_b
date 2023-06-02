@@ -78,6 +78,18 @@
                         <th>Job Description</th>
                         <td>{{$order->job_description ?? "N/A"}}</td>
                     </tr>
+                    <tr>
+                        <th>Gallery</th>
+                        <td>
+                            @forelse ($galleries as $gallery)
+                                <a href="{{asset('storage/gallery/' . $gallery)}}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{asset("storage/gallery/" . $gallery)}}" class="img-thumbnail" alt="..." style="width: 300px;" />
+                                </a>
+                            @empty   
+                            N/A                             
+                            @endforelse    
+                        </td>
+                    </tr>
                     
                 </tbody>
                 <tfoot>
