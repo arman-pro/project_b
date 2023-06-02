@@ -51,8 +51,8 @@ class OrderController extends Controller
         }    
         $data['gallery'] = json_encode($gallery_data);
         $data['created_by'] = Auth::id();
-        Order::create($data);
-        return redirect()->route('dashboard.orders.index')->with('message', 'Order Create Successfull!');
+        $order = Order::create($data);
+        return redirect()->route('payment', ['order' => $order->id]);
     }
 
     /**
