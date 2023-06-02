@@ -55,6 +55,11 @@
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
+          <div class="col-12-sm">
+            <p class="p-0 text-center text-danger">
+              <a href="{{ route('admin.forgot.password') }}">Forgot your password?</a>
+            </p>
+          </div>
           <!-- /.col -->
         </div>
       </form>

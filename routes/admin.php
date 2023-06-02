@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ResetPasswordController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/login', [AdminController::class, 'create_login'])->name("admin.login.create");
 Route::post('/admin/login', [AdminController::class, 'store_login'])->name("admin.login.store");
+Route::get('/admin/forgot-password', [ResetPasswordController::class, 'create'])->name('admin.forgot.password');
+Route::post('/admin/forgot-password', [ResetPasswordController::class, 'store'])->name('admin.forgot.password.store');
 
 Route::prefix("admin")->name("admin.")->middleware(['is_admin'])->group(function() {
     Route::get("/", [AdminController::class, 'dashboard'])->name("index");

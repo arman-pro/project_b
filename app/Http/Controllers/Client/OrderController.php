@@ -41,6 +41,15 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         $data = $request->all();
+        $gallery_data = [];
+        if($request->hasFile('gallery')) {
+            foreach($request->file('gallery') as $key => $gallery) {
+                $file_name = date('d_m_y_').'_gallery_'.substr(rand(), 0, 5). '.' . $gallery->extension();
+                $gallery->storeAs('public/gallery', $file_name);
+                $gallery_data[] = $file_name;
+            }
+        }    
+        $data['gallery'] = json_encode($gallery_data);
         $data['created_by'] = Auth::id();
         Order::create($data);
         return redirect()->route('dashboard.orders.index')->with('message', 'Order Create Successfull!');
@@ -65,7 +74,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('clients.orders.edit', compact('order'));
+        $galleries = json_decode($order->gallery);
+        return view('clients.orders.edit', compact('order', 'galleries'));
     }
 
     /**
@@ -77,7 +87,35 @@ class OrderController extends Controller
      */
     public function update(OrderRequest $request, Order $order)
     {
+        $galleries = json_decode($order->gallery);
+        $removed_item = array_diff($galleries, $request->old ?? []);
+        
+        if(count($removed_item) > 0) {
+            foreach($removed_item as $item) {
+                $path = public_path('storage/gallery/'.$item);
+                if(file_exists($path)) {
+                    unlink($path);
+                }
+            }
+        }
+
+        $gallery_data = [];
+        if($request->old) {
+            foreach($request->old as $old_gallery) {
+                $gallery_data[] = $old_gallery;
+            }
+        }
+      
+        if($request->hasFile('gallery')) {
+            foreach($request->file('gallery') as $key => $gallery) {
+                $file_name = date('d_m_y_').'_gallery_'.substr(rand(), 0, 5). '.' . $gallery->extension();
+                $gallery->storeAs('public/gallery', $file_name);
+                $gallery_data[] = $file_name;
+            }
+        }                
+
         $data = $request->all();
+        $data['gallery'] = json_encode($gallery_data);
         $data['created_by'] = Auth::id();
         $order->update($data);
         return redirect()->route('dashboard.orders.index')->with('message', "Order Updated Successfull!");
@@ -93,6 +131,15 @@ class OrderController extends Controller
     {
         if($order->created_by != Auth::id()) {
             return redirect()->back()->with('message', 'Sorry! You can not delete it!');
+        }
+        $galleries = json_decode($order->gallery);        
+        if(count($galleries) > 0) {
+            foreach($galleries as $item) {
+                $path = public_path('storage/gallery/'.$item);
+                if(file_exists($path)) {
+                    unlink($path);
+                }
+            }
         }
         $order->delete();
         return redirect()->route('dashboard.orders.index')->with("message", "Order delete successfull!");

@@ -29,6 +29,7 @@ class OrderRequest extends FormRequest
             'delivery_date' => ['required', 'date'],
             'image_destination' => ['required', 'url', 'max:255'],
             'job_description' => ['required', 'string'],
+            'gallery' => ['nullable', 'max:5', 'array'],
         ];
     }
 }

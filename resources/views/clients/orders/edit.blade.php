@@ -28,7 +28,7 @@
 @section('content')
 <div class="row">
     <div class="col-sm-11 m-auto">
-        <form action="{{route("dashboard.orders.update", ['order' => $order->id])}}" method="post">
+        <form action="{{route("dashboard.orders.update", ['order' => $order->id])}}" method="post" enctype="multipart/form-data">
             @method("PUT")
             @csrf
             <div class="card">
@@ -87,6 +87,29 @@
                                 @enderror         
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="job_description" class="col-sm-3 col-form-label text-right">Gallery*</label>
+                            <div class="col-md-9 col-sm-12">
+                                <div class="pb-2">
+                                    <button type="button" id="add_more_gallery" class="btn btn-sm btn-outline-info">Add Image</button>
+                                </div>
+                                <div class="row" id="gallery_box">
+                                    @forelse ($galleries as $gallery)
+                                    <div class="col-md-4 col-sm-12 box">
+                                        <input type="hidden" name="old[]" value="{{$gallery}}" />
+                                        <div class="card">
+                                            <img class="card-img-top" src="{{asset('storage/gallery/'.$gallery)}}" alt="Lights" style="width:100%">                                                
+                                            <div class="card-footer p-2">                                               
+                                                <button type="button" class="btn btn-xs btn-outline-danger remove">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty                                        
+                                    @endforelse
+                                        
+                                </div>                                    
+                            </div>
+                        </div>
                        
                         <div class="form-group row">
                             <label for="job_description" class="col-sm-3 col-form-label text-right">&nbsp;</label>
@@ -102,5 +125,51 @@
 </div>
 @endsection
 
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $("#add_more_gallery").on('click', function () {
+                if($('.box').length > 4) {
+                    Swal.fire({
+                        icon: "info",
+                        title: "Info",
+                        text: "You maximum 5 image you can upload!"
+                    });
+                    return;
+                }
+                let id = Number(Math.random() * 560).toFixed(0);
+                let box = `<div class="col-md-4 col-sm-12 box">
+                                            <input type="file" name="gallery[]" data-preview="preview${id}" id="gallery${id}" style="display:none;">
+                                            <div class="card">
+                                                <img class="card-img-top" id="preview${id}" src="{{asset('placeholder.jpg')}}" alt="Lights" style="width:100%">                                                
+                                                <div class="card-footer p-2">
+                                                    <button type="button" data-img="gallery${id}" class="btn btn-xs btn-dark upload">Upload</button>
+                                                    <button type="button" class="btn btn-xs btn-outline-danger remove">Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                $("#gallery_box").append(box);
+                return;
+            });
 
+            $(document).on('click', '.remove', function() {
+                $(this).closest('.box').remove();
+            });
+
+            $(document).on('change', 'input[name="gallery[]"]', function (evt) {
+                let preview = $(this).data('preview');
+                console.log(preview);
+                const [file] = evt.target.files
+                if (file) {
+                   $(document).find("#"+preview).attr('src', URL.createObjectURL(file));
+                }
+            });
+
+            $(document).on('click', '.upload', function() {
+                let img = $(this).data('img');
+                let input = $(document).find('#'+img).trigger('click');
+            });
+        });
+    </script>
+@endpush
 
