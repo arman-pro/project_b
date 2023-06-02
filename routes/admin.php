@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ResetPasswordController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -53,4 +54,12 @@ Route::prefix("admin")->name("admin.")->middleware(['is_admin'])->group(function
      * Order route list
      */
     Route::resource("orders", OrderController::class);
+
+    /**
+     * payment list
+     */
+    Route::get('/payment/list', function() {
+        $payments = Payment::orderBy('id', 'desc')->get();
+        return view('admin.payment', compact('payments'));
+    })->name('payment.list');
 });

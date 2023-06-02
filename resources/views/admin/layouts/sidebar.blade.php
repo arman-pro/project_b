@@ -20,6 +20,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{route("admin.payment.list")}}" class="nav-link">
+                    <i class="nav-icon fas fa-angle-double-right"></i>
+                    <p>Payment List</p>
+                </a>
+            </li>
+
             @if($admin_user->canany(['category-index', "category-create", "category-update", "category-destroy"]))
             <li class="nav-item">
                 <a href="{{route("admin.category.index")}}" class="nav-link">
