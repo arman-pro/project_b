@@ -148,5 +148,14 @@
   });
 </script>
 @endif
+@if(session('info'))
+<script>
+  Swal.fire({
+    icon: 'info',
+    title: "Info",
+    text: "{{session('info')}}",
+  });
+</script>
+@endif
 </body>
 </html>
