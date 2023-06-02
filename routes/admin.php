@@ -19,6 +19,8 @@ Route::get('/admin/login', [AdminController::class, 'create_login'])->name("admi
 Route::post('/admin/login', [AdminController::class, 'store_login'])->name("admin.login.store");
 Route::get('/admin/forgot-password', [ResetPasswordController::class, 'create'])->name('admin.forgot.password');
 Route::post('/admin/forgot-password', [ResetPasswordController::class, 'store'])->name('admin.forgot.password.store');
+Route::get('/admin/change-password', [ResetPasswordController::class, 'change'])->name('admin.forgot.password.change');
+Route::post('/admin/change-password', [ResetPasswordController::class, 'changeStore'])->name('admin.forgot.password.change.store');
 
 Route::prefix("admin")->name("admin.")->middleware(['is_admin'])->group(function() {
     Route::get("/", [AdminController::class, 'dashboard'])->name("index");
