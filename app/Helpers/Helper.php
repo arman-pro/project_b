@@ -39,7 +39,7 @@ if(!function_exists('get_query_strings'))
     function get_query_strings()
     {
         $query = [];  
-        if(isset($_SERVER['QUERY_STRING'])) {
+        if(isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != '') {
             $param_couple = explode("&", $_SERVER['QUERY_STRING']);
             foreach($param_couple as $param) {
                 $arr = explode('=', $param);

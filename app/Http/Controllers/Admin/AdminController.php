@@ -29,11 +29,19 @@ class AdminController extends Controller
     public function dashboard() 
     {
         $total_orders = Order::count();
+        $totalPendingOrders = Order::whereStatus(1)->count();
+        $totalCanceledOrders = Order::whereStatus(0)->count();
+        $totalProcessingOrders = Order::whereStatus(2)->count();
+        $totalCompeleteOrders = Order::whereStatus(3)->count();
         $total_category = Category::count();
         $total_blogs = Blog::count();
         $total_clients = User::count();
         $total_admins = Admin::count();
-        return view("admin.index", compact("total_category", "total_orders", "total_blogs", "total_clients", "total_admins"));
+        return view("admin.index", compact(
+            "total_category", "totalPendingOrders", "totalCanceledOrders", 
+            "totalProcessingOrders", "totalCompeleteOrders",
+            "total_orders", "total_blogs", "total_clients", "total_admins"
+        ));
     }
 
     public function profile()
