@@ -96,8 +96,12 @@
                                     <div class="pb-2">
                                         <button type="button" id="add_more_gallery" class="btn btn-sm btn-outline-info">Add Image</button>
                                     </div>
-                                    <div class="row" id="gallery_box"></div>                                    
+                                    <div class="row" id="gallery_box"></div>      
+                                    @error('gallery')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror                              
                                 </div>
+                                
                             </div>
                             <div class="form-group row">
                                 <label for="job_description" class="col-sm-3 col-form-label text-right">&nbsp;</label>
@@ -127,7 +131,7 @@
                 }
                 let id = Number(Math.random() * 560).toFixed(0);
                 let box = `<div class="col-md-4 col-sm-12 box">
-                                            <input type="file" name="gallery[]" data-preview="preview${id}" id="gallery${id}" style="display:none;">
+                                            <input type="file" name="gallery[]" accept="image/*" data-preview="preview${id}" id="gallery${id}" style="display:none;">
                                             <div class="card">
                                                 <img class="card-img-top" id="preview${id}" src="{{asset('placeholder.jpg')}}" alt="Lights" style="width:100%">                                                
                                                 <div class="card-footer p-2">
